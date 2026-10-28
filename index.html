@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Студия танцев «Ритм» Псков — Танцы для детей и подростков</title>
+  <!-- Google Fonts: Montserrat for body & headings (Black Italic 900i matches the mockup typography) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & DESIGN TOKENS (Extracted directly from mockup)
+       ========================================================================== */
+    :root {
+      --bg-page: #FAF9FE;
+      --grid-line: rgba(214, 188, 250, 0.28);
+      --text-dark: #0F0F14;
+      --text-muted: #5A5A66;
+      --neon-lime: #DFFF00;
+      --neon-lime-hover: #CCF000;
+      --electric-purple: #A800FF;
+      --electric-purple-light: #C651FF;
+      --coral-orange: #FF785A;
+      --lavender-blue: #9B7BFF;
+      --footer-bg: #130E24;
+      --white: #FFFFFF;
+      --container-width: 1120px;
+      --transition-fast: 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-page);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      /* Subtle vertical purple/pink architectural grid lines seen in mockup */
+      background-color: var(--bg-page);
+      background-image: repeating-linear-gradient(
+        to right,
+        transparent 0px,
+        transparent 79px,
+        var(--grid-line) 79px,
+        var(--grid-line) 80px
+      );
+      background-position: top center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input {
+      font-family: inherit;
+      border: none;
+      outline: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .header {
+      padding: 22px 0;
+      position: relative;
+      z-index: 20;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* Figma-inspired colorful geometric studio logo */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform var(--transition-fast);
+    }
+
+    .logo:hover {
+      transform: scale(1.06) rotate(-3deg);
+    }
+
+    //.logo svg {  //логотип фигмы
+    //  width: 34px;
+    //  height: 46px;
+    //  display: block;
+    //  filter: drop-shadow(0 4px 10px rgba(168, 0, 255, 0.12));
+    //}
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      position: relative;
+      padding-bottom: 5px;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 3px;
+      border-radius: 2px;
+      background-color: var(--electric-purple);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Header CTA Button */
+    .btn-lime {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--neon-lime);
+      color: var(--text-dark);
+      font-weight: 700;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+      box-shadow: 0 6px 18px rgba(223, 255, 0, 0.45);
+      user-select: none;
+    }
+
+    .btn-lime:hover {
+      background-color: var(--neon-lime-hover);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 24px rgba(223, 255, 0, 0.65);
+    }
+
+    .btn-lime:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .btn-header {
+      padding: 13px 32px;
+      font-size: 16px;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-btn {
+      display: none;
+      background: var(--neon-lime);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 20px 0 65px;
+      position: relative;
+    }
+
+    /* Subtle horizontal section divider line seen in Figma frame */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(168, 0, 255, 0.12);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 44% 56%;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      padding-top: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(50px, 6.2vw, 76px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+
+    /* Multi-layered neon offset on hero lines matching mockup */
+    .hero-title .line-1 {
+      display: block;
+      text-shadow: -3px -2px 0px #D480FF, 3px 3px 0px rgba(168, 0, 255, 0.35);
+    }
+
+    .hero-title .line-2 {
+      display: block;
+      text-shadow: 0 3px 0px #DFFF00;
+    }
+
+    .hero-title .line-3 {
+      display: block;
+      text-shadow: 0 3px 0px #DFFF00;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.32;
+      color: var(--text-dark);
+      margin-bottom: 32px;
+      max-width: 390px;
+    }
+
+    .btn-hero {
+      padding: 18px 36px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* Purple hand-drawn scribble at bottom-left of hero */
+    .hero-scribble-left {
+      position: absolute;
+      bottom: -68px;
+      left: -60px;
+      width: 225px;
+      height: auto;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Right Hero Visual Composition */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 450px;
+    }
+
+    .hero-graffiti-bg {
+      position: absolute;
+      inset: -35px -45px -45px -35px;
+      width: calc(100% + 80px);
+      height: calc(100% + 80px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-photo-stage {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 34px;
+      overflow: visible;
+    }
+
+    /* High energy teen dance crew cutout card with street-art frame */
+    .hero-photo-wrapper {
+      position: relative;
+      width: 100%;
+      height: 410px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 22px 48px rgba(168, 0, 255, 0.22);
+      border: 4px solid var(--white);
+      transform: rotate(-1deg);
+      transition: transform 0.4s ease;
+      background: linear-gradient(135deg, #a800ff 0%, #dfff00 100%);
+    }
+
+    .hero-photo-wrapper:hover {
+      transform: rotate(0deg) scale(1.015);
+    }
+
+    .hero-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      filter: saturate(1.18) contrast(1.05);
+    }
+
+    /* Floating energetic sticker badges to enhance the cutout vibe */
+    .hero-floating-tag {
+      position: absolute;
+      bottom: 18px;
+      left: -14px;
+      background: var(--neon-lime);
+      color: var(--text-dark);
+      font-weight: 900;
+      font-style: italic;
+      font-size: 13px;
+      padding: 7px 16px;
+      border-radius: 99px;
+      border: 2px solid var(--text-dark);
+      transform: rotate(-8deg);
+      z-index: 5;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    /* ==========================================================================
+       SECTION: НАШИ НАПРАВЛЕНИЯ (PROGRAMS)
+       ========================================================================== */
+    .directions {
+      padding: 64px 0 50px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 43px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--text-dark);
+      margin-bottom: 46px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Individual Program Card */
+    .program-card {
+      background: var(--white);
+      border-radius: 26px;
+      padding: 7px;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Card 1: Hip-Hop (Neon Lime Border + Glow) */
+    .card-hiphop {
+      background: var(--neon-lime);
+      box-shadow: 0 12px 32px rgba(205, 240, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Card 2: Breakdance (Electric Purple Border + Glow) */
+    .card-breakdance {
+      background: linear-gradient(180deg, #B800FF 0%, #9900F0 100%);
+      box-shadow: 0 12px 32px rgba(168, 0, 255, 0.35), 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Card 3: Contemporary (Coral to Lavender Gradient Border + Glow) */
+    .card-contemporary {
+      background: linear-gradient(155deg, #FF7B54 0%, #FF6B8B 48%, #9B6BFF 100%);
+      box-shadow: 0 12px 32px rgba(255, 115, 100, 0.32), 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-inner {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Tilted Top-Right Ribbon Tag */
+    .card-ribbon {
+      position: absolute;
+      top: 4px;
+      right: -8px;
+      z-index: 10;
+      padding: 8px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      transform: rotate(14deg);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+      letter-spacing: -0.01em;
+      pointer-events: none;
+    }
+
+    .card-hiphop .card-ribbon {
+      background: var(--neon-lime);
+      color: var(--text-dark);
+    }
+
+    .card-breakdance .card-ribbon {
+      background: #B800FF;
+      color: var(--white);
+    }
+
+    .card-contemporary .card-ribbon {
+      background: linear-gradient(90deg, #FF6E7F 0%, #9672FF 100%);
+      color: var(--white);
+      right: -12px;
+      padding: 8px 18px;
+    }
+
+    /* Card Image Container */
+    .card-image-box {
+      position: relative;
+      height: 272px;
+      margin: 4px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #E5E4EC;
+    }
+
+    .card-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .program-card:hover .card-image-box img {
+      transform: scale(1.06);
+    }
+
+    /* Age Badge Overlaid Inside Bottom-Right of Photo */
+    .age-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      padding: 7px 17px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+    }
+
+    .card-hiphop .age-badge {
+      background: var(--neon-lime);
+      color: var(--text-dark);
+    }
+
+    .card-breakdance .age-badge {
+      background: #9B26F6;
+      color: var(--white);
+    }
+
+    .card-contemporary .age-badge {
+      background: linear-gradient(90deg, #EE785F 0%, #9B6DFF 100%);
+      color: var(--white);
+    }
+
+    /* Card Text Content & Action Row */
+    .card-body {
+      padding: 16px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .card-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 22px;
+      border-radius: 999px;
+      border: 2px solid var(--text-dark);
+      background: var(--white);
+      color: var(--text-dark);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-outline:hover {
+      background: var(--text-dark);
+      color: var(--neon-lime);
+      transform: scale(1.04);
+    }
+
+    /* Exact match for mockup's "(7-15 лет", "(6-14 лет", "(8-16 лет" text label */
+    .card-age-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+
+    /* Decorative splashes around cards */
+    .cards-splatter-left {
+      position: absolute;
+      bottom: -56px;
+      left: -48px;
+      width: 240px;
+      height: 240px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cards-burst-right {
+      position: absolute;
+      top: -28px;
+      right: -36px;
+      width: 72px;
+      height: 72px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* ==========================================================================
+       SECTION: ПОЧЕМУ МЫ? (WHY US)
+       ========================================================================== */
+    .why-us {
+      padding: 68px 0 56px;
+      position: relative;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform var(--transition-fast);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      width: 96px;
+      height: 92px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 8px 16px rgba(168, 0, 255, 0.12));
+    }
+
+    .feature-title {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.24;
+      color: var(--text-dark);
+    }
+
+    /* Decorative doodles on right & left of "ПОЧЕМУ МЫ?" */
+    .why-doodle-right {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      width: 220px;
+      height: 220px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .why-doodle-left {
+      position: absolute;
+      bottom: -36px;
+      left: 0;
+      width: 145px;
+      height: 145px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .cursor-doodle-right {
+      position: absolute;
+      bottom: 8px;
+      right: 32px;
+      width: 38px;
+      height: 38px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* ==========================================================================
+       SECTION: ГОТОВ СДЕЛАТЬ ПЕРВЫЙ ШАГ? (CTA BANNER & FORM)
+       ========================================================================== */
+    .cta-section {
+      padding: 10px 0 46px;
+      position: relative;
+    }
+
+    .cta-banner {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      padding: 42px 52px 0;
+      box-shadow: 0 20px 50px rgba(168, 0, 255, 0.16);
+      /* Fallback gradient */
+      background: linear-gradient(103deg, #EEFF66 0%, #DFFF00 45%, #E7A9FF 45.2%, #AC00FF 100%);
+    }
+
+    /* Sharp diagonal two-tone split matching mockup */
+    .cta-bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(170deg, rgba(250, 245, 255, 0.85) 0%, rgba(223, 255, 0, 0.95) 45%, #D8FF00 100%);
+    }
+
+    .cta-bg-purple {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 60%;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(180deg, #F3D1FF 0%, #C84BFF 48%, #A200FF 100%);
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 22% 100%);
+    }
+
+    /* Bottom-left purple halftone dots inside CTA banner */
+    .cta-halftone-bl {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 190px;
+      height: 180px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 4;
+    }
+
+    .cta-heading {
+      font-size: clamp(26px, 3.75vw, 41px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .cta-columns {
+      display: grid;
+      grid-template-columns: 47% 53%;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .cta-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .cta-subtitle {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.24;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+    }
+
+    /* Happy kids photo anchored at bottom-left of banner */
+    .cta-kids-photo {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: 255px;
+      border-radius: 22px 22px 0 0;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.75);
+      border-bottom: none;
+      box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .cta-kids-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    /* Form on Right Side */
+    .cta-form-wrap {
+      padding-bottom: 38px;
+      padding-left: 16px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 54px;
+      padding: 0 22px;
+      border-radius: 15px;
+      border: 2px solid var(--text-dark);
+      background-color: var(--white);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .form-input::placeholder {
+      color: #6E6D7A;
+      font-weight: 500;
+    }
+
+    .form-input:focus {
+      border-color: var(--text-dark);
+      box-shadow: 0 0 0 4px rgba(223, 255, 0, 0.75);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit {
+      margin-top: 6px;
+      height: 60px;
+      width: 100%;
+      border-radius: 999px;
+      background-color: var(--neon-lime);
+      color: var(--text-dark);
+      font-size: 19px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+      transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-submit:hover {
+      background-color: var(--neon-lime-hover);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Small "UI" corner badge visible in the mockup bottom-right above footer */
+    .ui-badge-corner {
+      position: absolute;
+      bottom: 10px;
+      right: 34px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      user-select: none;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background-color: var(--footer-bg);
+      color: var(--white);
+      padding: 26px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-left-group,
+    .footer-right-group {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-watermark {
+      font-size: 22px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.22);
+      user-select: none;
+    }
+
+    .footer-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.92);
+      transition: color var(--transition-fast);
+    }
+
+    a.footer-text:hover {
+      color: var(--neon-lime);
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: var(--white);
+      color: var(--footer-bg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .social-btn:hover {
+      background-color: var(--neon-lime);
+      transform: translateY(-3px) scale(1.08);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE MODAL & TOAST NOTIFICATION
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 20, 0.72);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: 28px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px;
+      border: 4px solid var(--neon-lime);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F2F0F7;
+      color: var(--text-dark);
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      background: var(--neon-lime);
+    }
+
+    .modal-tag {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 800;
+      background: var(--electric-purple);
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .modal-desc {
+      font-size: 15px;
+      line-height: 1.55;
+      color: #454552;
+      margin-bottom: 18px;
+    }
+
+    .modal-meta {
+      background: #F7F5FC;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--footer-bg);
+      color: var(--white);
+      border: 2px solid var(--neon-lime);
+      padding: 16px 24px;
+      border-radius: 18px;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+      z-index: 120;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-scribble-left {
+        left: 10px;
+        bottom: -45px;
+        width: 160px;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-bg-purple {
+        width: 100%;
+        clip-path: polygon(0 44%, 100% 34%, 100% 100%, 0% 100%);
+      }
+
+      .cta-heading,
+      .cta-subtitle {
+        text-align: center;
+      }
+
+      .cta-kids-photo {
+        margin: 0 auto;
+      }
+
+      .cta-form-wrap {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .nav-list {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 20px;
+        right: 20px;
+        background: var(--white);
+        border: 3px solid var(--electric-purple);
+        border-radius: 20px;
+        flex-direction: column;
+        padding: 20px;
+        gap: 18px;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+      }
+
+      .nav-list.open {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .cards-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .why-doodle-right {
+        width: 120px;
+        height: 120px;
+        top: -20px;
+      }
+
+      .cta-banner {
+        padding: 32px 22px 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-left-group,
+      .footer-right-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER
+       ======================================================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <!-- Colorful Geometric Studio Logo matching mockup -->
+      <a href="#" class="logo" aria-label="Студия танцев Ритм">
+        <svg viewBox="0 0 38 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 11C4 6.58172 7.58172 3 12 3H19V19H12C7.58172 19 4 15.4183 4 11Z" fill="#FF4B3A"/>
+          <path d="M19 3H26C30.4183 3 34 6.58172 34 11C34 15.4183 30.4183 19 26 19H19V3Z" fill="#FF7664"/>
+          <path d="M4 26C4 21.5817 7.58172 18 12 18H19V34H12C7.58172 34 4 30.4183 4 26Z" fill="#22C1FF"/>
+          <circle cx="26.5" cy="26.5" r="7.5" fill="#9D4EDD"/>
+          <path d="M4 41C4 36.5817 7.58172 33 12 33H19V41C19 45.4183 15.4183 49 11 49C7.13401 49 4 45.866 4 41Z" fill="#0ACF83"/>
+          <circle cx="23" cy="37" r="4.5" fill="#FFD600"/>
+        </svg>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav aria-label="Основная навигация">
+        <ul class="nav-list" id="navList">
+          <li><a href="#hero" class="nav-link active">Главная</a></li>
+          <li><a href="#programs" class="nav-link">Программы</a></li>
+          <li><a href="#why-us" class="nav-link">О нас</a></li>
+          <li><a href="#contacts" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Right Actions -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="#signup" class="btn-lime btn-header">Записаться</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F0F14" stroke-width="2.5" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       HERO SECTION
+       ======================================================================== -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <!-- Left Column: Headline, Subtitle, CTA -->
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="line-1">РАСКРОЙ</span>
+          <span class="line-2">СВОЙ</span>
+          <span class="line-3">РИТМ.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Танцы для детей и подростков<br />
+          в Пскове!
+        </p>
+        <a href="#signup" class="btn-lime btn-hero">Записаться на пробный урок</a>
+
+        <!-- Decorative Purple Scribble under CTA button -->
+        <svg class="hero-scribble-left" viewBox="0 0 240 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12C30 38 56 68 78 82C65 55 50 32 45 20C72 44 102 68 128 80C120 55 114 38 112 25C138 48 164 68 195 72C184 48 175 34 170 22" stroke="#A800FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="28" cy="70" r="3" fill="#A800FF"/>
+          <circle cx="215" cy="45" r="4" fill="#A800FF"/>
+        </svg>
+      </div>
+
+      <!-- Right Column: Street-Art Splashes, Halftone Dots & Kids Crew Photo -->
+      <div class="hero-visual">
+        <!-- Layered Graffiti SVG Background -->
+        <svg class="hero-graffiti-bg" viewBox="0 0 650 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="halftoneBlack" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+              <circle cx="5" cy="5" r="3.2" fill="#18122B" />
+            </pattern>
+            <pattern id="halftonePurple" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="4" cy="4" r="2.6" fill="#7B00CC" />
+            </pattern>
+          </defs>
+
+          <!-- Halftone Dot Clusters -->
+          <circle cx="515" cy="115" r="78" fill="url(#halftoneBlack)" opacity="0.85"/>
+          <circle cx="155" cy="390" r="72" fill="url(#halftoneBlack)" opacity="0.8"/>
+          <circle cx="465" cy="425" r="65" fill="url(#halftonePurple)" opacity="0.7"/>
+
+          <!-- Dynamic Purple Brush Sweeps & Splatters -->
+          <path d="M140 165C210 70 365 25 460 65C555 105 615 220 575 340C535 460 390 490 250 465C110 440 70 260 140 165Z" fill="#A800FF" />
+          <path d="M365 25C410 -5 465 15 445 65" stroke="#A800FF" stroke-width="18" stroke-linecap="round"/>
+          <path d="M82 225L155 255" stroke="#A800FF" stroke-width="6" stroke-linecap="round"/>
+          <path d="M365 515L415 440" stroke="#A800FF" stroke-width="7" stroke-linecap="round"/>
+
+          <!-- Neon Lime Splashes on Right & Left Edges -->
+          <path d="M560 145C595 135 628 162 615 198C602 234 590 268 620 295C642 315 618 365 582 355C546 345 535 220 560 145Z" fill="#DFFF00"/>
+          <circle cx="622" cy="128" r="9" fill="#DFFF00"/>
+          <circle cx="115" cy="312" r="16" fill="#DFFF00"/>
+          <circle cx="92" cy="336" r="7" fill="#DFFF00"/>
+          <circle cx="545" cy="448" r="14" fill="#A800FF"/>
+          <circle cx="585" cy="468" r="6" fill="#A800FF"/>
+          <circle cx="332" cy="508" r="5" fill="#A800FF"/>
+        </svg>
+
+        <!-- High-Energy Teen Dance Crew Photo -->
+        <div class="hero-photo-stage">
+          <div class="hero-photo-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1100&q=85"
+              alt="Дружная команда детей и подростков студии танцев Ритм"
+              onerror="this.src='https://placehold.co/800x600/A800FF/DFFF00?text=%D0%A0%D0%98%D0%A2%D0%9C+%D0%9F%D0%A1%D0%9A%D0%9E%D0%92'"
+            />
+          </div>
+          <div class="hero-floating-tag">#РИТМПСКОВ ⚡</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION: НАШИ НАПРАВЛЕНИЯ (PROGRAMS)
+       ======================================================================== -->
+  <section class="directions" id="programs">
+    <div class="container">
+      <h2 class="section-title">НАШИ НАПРАВЛЕНИЯ</h2>
+
+      <div class="cards-grid">
+        <!-- Decorative Purple Paint Splatter Behind Bottom-Left of Card 1 -->
+        <svg class="cards-splatter-left" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="95" cy="110" r="46" fill="#A800FF" opacity="0.25"/>
+          <path d="M22 185L85 130" stroke="#A800FF" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="48" cy="145" r="6" fill="#A800FF"/>
+          <circle cx="32" cy="118" r="3.5" fill="#A800FF"/>
+          <circle cx="65" cy="190" r="5" fill="#A800FF"/>
+          <circle cx="115" cy="182" r="4" fill="#A800FF"/>
+          <circle cx="145" cy="196" r="3" fill="#A800FF"/>
+        </svg>
+
+        <!-- Decorative Black Doodle Burst at Top-Right of Card 3 -->
+        <svg class="cards-burst-right" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 36L28 12" stroke="#18122B" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M36 44L58 22" stroke="#18122B" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M44 58L68 52" stroke="#18122B" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="48" cy="44" r="3" fill="#18122B"/>
+        </svg>
+
+        <!-- CARD 1: Hip-Hop -->
+        <article class="program-card card-hiphop">
+          <span class="card-ribbon">Hip-Hop</span>
+          <div class="card-inner">
+            <div class="card-image-box">
+              <img
+                src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?auto=format&fit=crop&w=800&q=80"
+                alt="Направление Hip-Hop для детей и подростков"
+                onerror="this.src='https://placehold.co/600x500/222222/DFFF00?text=Hip-Hop'"
+              />
+              <span class="age-badge">7-15 лет</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Hip-Hop</h3>
+              <div class="card-footer-row">
+                <button type="button" class="btn-outline" data-program="hiphop">Подробнее</button>
+                <span class="card-age-text">(7-15 лет</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 2: Breakdance -->
+        <article class="program-card card-breakdance">
+          <span class="card-ribbon">Breakdance</span>
+          <div class="card-inner">
+            <div class="card-image-box">
+              <img
+                src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?auto=format&fit=crop&w=800&q=80"
+                alt="Направление Breakdance"
+                onerror="this.src='https://placehold.co/600x500/B800FF/FFFFFF?text=Breakdance'"
+              />
+              <span class="age-badge">6-14 лет</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Breakdance</h3>
+              <div class="card-footer-row">
+                <button type="button" class="btn-outline" data-program="breakdance">Подробнее</button>
+                <span class="card-age-text">(6-14 лет</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3: Contemporary -->
+        <article class="program-card card-contemporary">
+          <span class="card-ribbon">Contemporary</span>
+          <div class="card-inner">
+            <div class="card-image-box">
+              <img
+                src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=800&q=80"
+                alt="Направление Contemporary"
+                onerror="this.src='https://placehold.co/600x500/FF785A/FFFFFF?text=Contemporary'"
+              />
+              <span class="age-badge">8-16 лет</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Contemporary</h3>
+              <div class="card-footer-row">
+                <button type="button" class="btn-outline" data-program="contemporary">Подробнее</button>
+                <span class="card-age-text">(8-16 лет</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION: ПОЧЕМУ МЫ? (WHY US)
+       ======================================================================== -->
+  <section class="why-us" id="why-us">
+    <div class="container">
+      <h2 class="section-title">ПОЧЕМУ МЫ?</h2>
+
+      <!-- Right Side Street-Art Stars, Neon Lime Brush & Curved Arrow -->
+      <svg class="why-doodle-right" viewBox="0 0 240 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Neon Lime Brush Strokes -->
+        <path d="M72 88L228 32" stroke="#DFFF00" stroke-width="24" stroke-linecap="round"/>
+        <path d="M98 118L235 82" stroke="#DFFF00" stroke-width="20" stroke-linecap="round"/>
+        <!-- Solid Black Star Top-Left -->
+        <path d="M42 12L49 30L68 30L53 41L59 59L42 48L25 59L31 41L16 30L35 30L42 12Z" fill="#18122B"/>
+        <!-- Outlined Hand-Drawn Star Center -->
+        <path d="M126 24L134 58L168 62L138 78L144 112L120 88L92 102L106 72L85 52L116 54L126 24Z" stroke="#18122B" stroke-width="4.5" stroke-linejoin="round"/>
+        <!-- Small Star -->
+        <path d="M122 118L126 130L138 130L128 138L132 150L122 142L112 150L116 138L106 130L118 130L122 118Z" stroke="#18122B" stroke-width="3.5" fill="#DFFF00"/>
+        <!-- Curved Hand-Drawn Black Arrow -->
+        <path d="M168 92C205 112 204 162 152 184" stroke="#18122B" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M192 98L165 90L174 116" stroke="#18122B" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M166 168L146 186L174 188" stroke="#18122B" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- Left Side Stars & Purple Zigzag Arrow -->
+      <svg class="why-doodle-left" viewBox="0 0 160 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Small Black & Lime Stars -->
+        <path d="M35 18L40 31L54 31L43 39L47 52L35 44L23 52L27 39L16 31L30 31L35 18Z" fill="#18122B"/>
+        <path d="M58 12L62 24L74 24L64 31L68 43L58 35L48 43L52 31L42 24L54 24L58 12Z" fill="#DFFF00"/>
+        <!-- Purple Zigzag Arrow pointing top-right -->
+        <path d="M10 138L32 95L46 122L118 72" stroke="#A800FF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M92 68L122 68L110 96" stroke="#A800FF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- Cursor Arrow Doodle near bottom-right of Why Us -->
+      <svg class="cursor-doodle-right" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 6L36 22L22 25L17 38L8 6Z" stroke="#18122B" stroke-width="3.2" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- 3 Feature Columns -->
+      <div class="features-grid">
+        <!-- Feature 1: Опытные хореографы -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Head & Hair -->
+              <circle cx="38" cy="24" r="13" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2"/>
+              <path d="M27 20C30 13 44 13 49 20" stroke="#A800FF" stroke-width="3.2" stroke-linecap="round"/>
+              <!-- Torso & Jacket -->
+              <path d="M18 72V54C18 46.268 24.268 40 32 40H44C51.732 40 58 46.268 58 54V72H18Z" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2" stroke-linejoin="round"/>
+              <!-- V-neck Collar & Tie -->
+              <path d="M31 40L38 52L45 40" stroke="#A800FF" stroke-width="3" stroke-linejoin="round"/>
+              <!-- Hand & Choreographer Pointer Stick -->
+              <circle cx="63" cy="58" r="6" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2"/>
+              <path d="M65 52L74 22" stroke="#A800FF" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Опытные<br />хореографы</h3>
+        </div>
+
+        <!-- Feature 2: Большие и современные залы -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="92" height="88" viewBox="0 0 92 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Large Studio Mirror Frame -->
+              <rect x="14" y="10" width="64" height="40" rx="5" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2"/>
+              <!-- Diagonal Expansion / Reflection Arrows inside Mirror -->
+              <path d="M26 38L34 22M26 22H34V30" stroke="#A800FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M56 38L66 22M58 22H66V30" stroke="#A800FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- 3 Dancers Silhouettes in Front of Mirror -->
+              <circle cx="25" cy="60" r="5" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+              <path d="M16 76C16 71 20 68 25 68C30 68 34 71 34 76H16Z" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+              <circle cx="46" cy="60" r="5" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+              <path d="M37 76C37 71 41 68 46 68C51 68 55 71 55 76H37Z" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+              <circle cx="67" cy="60" r="5" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+              <path d="M58 76C58 71 62 68 67 68C72 68 76 71 76 76H58Z" fill="#DFFF00" stroke="#A800FF" stroke-width="2.8"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Большие и<br />современные залы</h3>
+        </div>
+
+        <!-- Feature 3: Выступления и баттлы -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Dynamic Jumping / Battle Dancer -->
+              <circle cx="44" cy="20" r="9" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2"/>
+              <path d="M20 16L33 30H55L68 16L74 22L58 40V52L70 66L63 73L48 58H40L25 73L18 66L30 52V40L14 22L20 16Z" fill="#DFFF00" stroke="#A800FF" stroke-width="3.2" stroke-linejoin="round"/>
+              <!-- Stage Floor Accent Lines -->
+              <path d="M14 78H34M54 78H74" stroke="#A800FF" stroke-width="3.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Выступления<br />и баттлы</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION: ГОТОВ СДЕЛАТЬ ПЕРВЫЙ ШАГ? (CTA BANNER & FORM)
+       ======================================================================== -->
+  <section class="cta-section" id="signup">
+    <div class="container">
+      <div class="cta-banner">
+        <!-- Diagonal Two-Tone Split Background Layers -->
+        <div class="cta-bg-layer"></div>
+        <div class="cta-bg-purple"></div>
+
+        <!-- Purple Halftone & Paint Splatters at Bottom-Left Corner -->
+        <svg class="cta-halftone-bl" viewBox="0 0 200 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="52" cy="148" r="56" fill="url(#halftonePurple)" opacity="0.85"/>
+          <path d="M75 110C95 95 125 112 115 140C105 168 65 180 45 160" fill="#A800FF" opacity="0.75"/>
+          <circle cx="34" cy="84" r="6" fill="#A800FF"/>
+          <circle cx="54" cy="96" r="4" fill="#A800FF"/>
+        </svg>
+
+        <div class="cta-inner">
+          <h2 class="cta-heading">ГОТОВ СДЕЛАТЬ ПЕРВЫЙ ШАГ?</h2>
+
+          <div class="cta-columns">
+            <!-- Left Column: Subtitle + Happy Teens Photo -->
+            <div class="cta-left">
+              <p class="cta-subtitle">
+                Оставь заявку<br />
+                и мы подберем группу!
+              </p>
+              <div class="cta-kids-photo">
+                <img
+                  src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80"
+                  alt="Улыбающиеся ученики студии танцев Ритм"
+                  onerror="this.src='https://placehold.co/600x400/A800FF/DFFF00?text=%D0%96%D0%94%D0%95%D0%9C+%D0%A2%D0%95%D0%91%D0%AF!'"
+                />
+              </div>
+            </div>
+
+            <!-- Right Column: Lead Capture Form -->
+            <div class="cta-form-wrap">
+              <form class="signup-form" id="leadForm" novalidate>
+                <input
+                  type="text"
+                  class="form-input"
+                  id="inputName"
+                  name="name"
+                  placeholder="Имя"
+                  required
+                  aria-label="Имя"
+                />
+                <input
+                  type="tel"
+                  class="form-input"
+                  id="inputPhone"
+                  name="phone"
+                  placeholder="Телефон"
+                  required
+                  aria-label="Телефон"
+                />
+                <input
+                  type="text"
+                  class="form-input"
+                  id="inputAge"
+                  name="age"
+                  placeholder="Возраст ребенка"
+                  required
+                  aria-label="Возраст ребенка"
+                />
+                <button type="submit" class="btn-submit">ХОЧУ ТАНЦЕВАТЬ!</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockup Bottom-Right "UI" Watermark -->
+      <span class="ui-badge-corner" aria-hidden="true">UI</span>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer" id="contacts">
+    <div class="container footer-inner">
+      <div class="footer-left-group">
+        <span class="footer-watermark" aria-hidden="true">UI</span>
+        <span class="footer-text">Студия танцев «Ритм» Псков</span>
+      </div>
+
+      <a href="tel:+78112000000" class="footer-text">+7 (8112) XX-XX-XX</a>
+
+      <span class="footer-text">г. Псков, ул. Ленина, д. 10</span>
+
+      <div class="footer-right-group">
+        <div class="social-links">
+          <!-- VK Icon -->
+          <a href="#vk" class="social-btn" aria-label="ВКонтакте" data-social="ВКонтакте">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/>
+            </svg>
+          </a>
+          <!-- Telegram Icon -->
+          <a href="#tg" class="social-btn" aria-label="Telegram" data-social="Telegram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </a>
+        </div>
+        <span class="footer-watermark" aria-hidden="true">UI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PROGRAM DETAILS MODAL (Triggered by "Подробнее" buttons)
+       ======================================================================== -->
+  <div class="modal-overlay" id="programModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Закрыть окно">✕</button>
+      <span class="modal-tag" id="modalAgeTag">7-15 лет</span>
+      <h3 class="modal-title" id="modalTitle">Hip-Hop</h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <a href="#signup" class="btn-lime" id="modalSignupBtn" style="width: 100%; padding: 15px; font-size: 16px;">
+        Записаться в эту группу
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastBox" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       INTERACTIVE JAVASCRIPT
+       ======================================================================== -->
+  <script>
+    // 1. Mobile Navigation Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navList = document.getElementById('navList');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navList.classList.toggle('open');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        navList.classList.remove('open');
+      });
+    });
+
+    // 2. Program Details Modal Data & Logic
+    const programData = {
+      hiphop: {
+        title: 'Hip-Hop',
+        age: '7-15 лет',
+        tagColor: '#DFFF00',
+        tagText: '#0F0F14',
+        desc: 'Самое популярное уличное направление! Развиваем чувство ритма, координацию, музыкальность и уверенность в себе. Ученики осваивают базовый кач, фристайл и ставят яркие командные номера.',
+        schedule: '📅 Расписание: Пн / Ср / Пт — 16:30 и 18:00',
+        coach: '👟 Хореограф: Артём Соколов (победитель Russian Dance Champ)'
+      },
+      breakdance: {
+        title: 'Breakdance',
+        age: '6-14 лет',
+        tagColor: '#B800FF',
+        tagText: '#FFFFFF',
+        desc: 'Акробатика, силовые элементы (Power Move), эффектные фризы и работа на полу (Footwork). Идеально подходит для активных ребят, которые хотят развить силу, выносливость и ловкость.',
+        schedule: '📅 Расписание: Вт / Чт / Сб — 17:00 и 18:30',
+        coach: '👟 Хореограф: Максим «B-Boy Spark» Громов'
+      },
+      contemporary: {
+        title: 'Contemporary',
+        age: '8-16 лет',
+        tagColor: '#FF7556',
+        tagText: '#FFFFFF',
+        desc: 'Современная пластическая хореография, сочетающая технику, гибкость, акробатику и глубокую эмоциональную выразительность. Учимся чувствовать своё тело и рассказывать истории через танец.',
+        schedule: '📅 Расписание: Вт / Чт — 16:00, Сб — 14:00',
+        coach: '👟 Хореограф: Алина Вершинина'
+      }
+    };
+
+    const programModal = document.getElementById('programModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAgeTag = document.getElementById('modalAgeTag');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalSignupBtn = document.getElementById('modalSignupBtn');
+
+    document.querySelectorAll('[data-program]').forEach(button => {
+      button.addEventListener('click', () => {
+        const key = button.getAttribute('data-program');
+        const info = programData[key];
+        if (!info) return;
+
+        modalTitle.textContent = info.title;
+        modalAgeTag.textContent = info.age;
+        modalAgeTag.style.backgroundColor = info.tagColor;
+        modalAgeTag.style.color = info.tagText;
+        modalDesc.textContent = info.desc;
+        modalMeta.innerHTML = `<span>${info.schedule}</span><span>${info.coach}</span>`;
+
+        programModal.classList.add('active');
+      });
+    });
+
+    const closeModal = () => programModal.classList.remove('active');
+    modalCloseBtn.addEventListener('click', closeModal);
+    programModal.addEventListener('click', (e) => {
+      if (e.target === programModal) closeModal();
+    });
+    modalSignupBtn.addEventListener('click', closeModal);
+
+    // 3. Toast Helper
+    const toastBox = document.getElementById('toastBox');
+    let toastTimer = null;
+
+    function showToast(message) {
+      toastBox.textContent = message;
+      toastBox.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastBox.classList.remove('show');
+      }, 4000);
+    }
+
+    // 4. Phone Input Masking & Form Submission
+    const inputPhone = document.getElementById('inputPhone');
+    inputPhone.addEventListener('input', (e) => {
+      let digits = e.target.value.replace(/\D/g, '');
+      if (!digits) {
+        e.target.value = '';
+        return;
+      }
+      if (digits[0] === '8') digits = '7' + digits.slice(1);
+      if (digits[0] !== '7') digits = '7' + digits;
+
+      let formatted = '+7';
+      if (digits.length > 1) formatted += ' (' + digits.substring(1, 4);
+      if (digits.length >= 5) formatted += ') ' + digits.substring(4, 7);
+      if (digits.length >= 8) formatted += '-' + digits.substring(7, 9);
+      if (digits.length >= 10) formatted += '-' + digits.substring(9, 11);
+
+      e.target.value = formatted;
+    });
+
+    const leadForm = document.getElementById('leadForm');
+    leadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameVal = document.getElementById('inputName').value.trim();
+      const phoneVal = document.getElementById('inputPhone').value.trim();
+      const ageVal = document.getElementById('inputAge').value.trim();
+
+      if (!nameVal || !phoneVal || !ageVal) {
+        showToast('⚡ Пожалуйста, заполните имя, телефон и возраст ребенка!');
+        return;
+      }
+
+      showToast(`🎉 Отлично, ${nameVal}! Заявка принята — мы скоро позвоним вам!`);
+      leadForm.reset();
+    });
+
+    // 5. Social Links Feedback
+    document.querySelectorAll('[data-social]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const network = btn.getAttribute('data-social');
+        showToast(`Переход в официальную группу «Ритм» Псков в ${network}`);
+      });
+    });
+  </script>
+</body>
+</html>
